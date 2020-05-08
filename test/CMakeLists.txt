@@ -1,15 +1,15 @@
 itk_module_test()
 
-set(${itk-module}Tests
-    VariationalRegistrationFilterTest.cxx
-    VariationalRegistrationMultiResolutionFilterTest.cxx
+set(VariationalRegistrationTests
+        itkVariationalRegistrationFilterTest.cxx
+        itkVariationalRegistrationMultiResolutionFilterTest.cxx
 )
 
 # both approaches do not work
 # list(APPEND ExternalData_URL_TEMPLATES "http://jehrhardt.bplaced.net/VariationalRegistration/%(algo)/%(hash)")
 # set(ExternalData_URL_TEMPLATES "http://jehrhardt.bplaced.net/VariationalRegistration/%(algo)/%(hash)")
 
-CreateTestDriver(${itk-module} "${${itk-module}-Test_LIBRARIES}" "${${itk-module}Tests}")
+CreateTestDriver(VariationalRegistration "${VariationalRegistration-Test_LIBRARIES}" "${VariationalRegistrationTests}")
 
 #####################################
 #
@@ -19,10 +19,10 @@ CreateTestDriver(${itk-module} "${${itk-module}-Test_LIBRARIES}" "${${itk-module
 set(TEMP ${CMAKE_BINARY_DIR}/Testing/Temporary)
 
 itk_add_test(NAME VariationalRegistrationFilterTest
-      COMMAND ${itk-module}TestDriver VariationalRegistrationFilterTest)
+      COMMAND VariationalRegistrationTestDriver itkVariationalRegistrationFilterTest)
 
 itk_add_test(NAME VariationalRegistrationMultiResolutionFilterTest
-      COMMAND ${itk-module}TestDriver VariationalRegistrationMultiResolutionFilterTest)
+      COMMAND VariationalRegistrationTestDriver itkVariationalRegistrationMultiResolutionFilterTest)
 
 add_custom_target(BuildExecutablesUsedInTests COMMAND echo "Dummy target"
                   DEPENDS VariationalRegistration VariationalRegistration2D)
@@ -37,7 +37,7 @@ function(Test2D TestName OutputExt)
   endif()
 
   itk_add_test(NAME ${TestName}
-    COMMAND itkTestDriver
+    COMMAND VariationalRegistrationTestDriver
     --compare DATA{Baseline/${TestName}.tif} ${TEMP}/${TestName}.tif
     $<TARGET_FILE:VariationalRegistration2D>
     -F DATA{Input/img1.png} -M DATA{Input/img2.png} -l 4 -p 1 -g 0.00001
@@ -90,7 +90,7 @@ Test2D(VariationalRegistrationSymDiff2DTest "" -r 1 -a 1.5 -s 2 -e 2)
 
 function(Test3D TestName)
   itk_add_test(NAME ${TestName}
-    COMMAND itkTestDriver
+    COMMAND VariationalRegistrationTestDriver
     --compare DATA{Baseline/${TestName}.nii.gz} ${TEMP}/${TestName}.nii.gz
     $<TARGET_FILE:VariationalRegistration>
     -F DATA{Input/10-P_5x5x5.nii.gz} -M DATA{Input/60-P_5x5x5.nii.gz} -l 3 -p 1 -g 0.00001

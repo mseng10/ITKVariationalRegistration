@@ -103,7 +103,7 @@ CopyImageBuffer(TImage * input, TImage * output)
 }
 
 int
-VariationalRegistrationMultiResolutionFilterTest(int, char *[])
+itkVariationalRegistrationMultiResolutionFilterTest(int, char *[])
 {
 
   using PixelType = unsigned char;
