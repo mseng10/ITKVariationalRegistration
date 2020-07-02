@@ -1,6 +1,8 @@
 ITKVariationalRegistration
 ==========================
 
+.. image:: https://github.com/InsightSoftwareConsortium/ITKVariationalRegistration/workflows/Build,%20test,%20package/badge.svg
+
 .. |CircleCI| image:: https://circleci.com/gh/InsightSoftwareConsortium/ITKVariationalRegistration.svg?style=shield
     :target: https://circleci.com/gh/InsightSoftwareConsortium/ITKVariationalRegistration
 
